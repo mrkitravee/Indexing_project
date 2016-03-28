@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package indexing_project;
+package guitest;
 
 /**
  *
@@ -52,7 +52,7 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.apache.poi.xwpf.usermodel.XWPFDocument;
 import org.apache.poi.xwpf.usermodel.XWPFParagraph;
-import static indexing_project.Step1.frequencyMap;
+import static guitest.Step1.frequencyMap;
 public class indexingAction {
     /*
  * To change this license header, choose License Headers in Project Properties.

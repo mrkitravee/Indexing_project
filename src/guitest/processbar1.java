@@ -1,4 +1,4 @@
-package indexing_project;
+package guitest;
 
 
 import java.awt.Toolkit;

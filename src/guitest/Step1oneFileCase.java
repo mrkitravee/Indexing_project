@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package indexing_project;
+package guitest;
 
 import java.io.FileWriter;
 import java.io.IOException;

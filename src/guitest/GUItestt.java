@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package indexing_project;
+package guitest;
 
 
 import au.com.bytecode.opencsv.CSVReader;
@@ -912,12 +912,12 @@ public class GUItestt extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenu1.addAncestorListener(new javax.swing.event.AncestorListener() {
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
-            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jMenu1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -986,7 +986,7 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-        new DevelopersGUI().setVisible(true);
+        
     }//GEN-LAST:event_jMenuItem4ActionPerformed
     //find word
     private void filter(String query){
