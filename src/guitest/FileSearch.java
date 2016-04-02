@@ -13,59 +13,54 @@ import java.util.List;
  *
  * @author Kitravee
  */
-
 //class to all path
 public class FileSearch {
+
     private String fileNameToSearch;
     private List<String> result = new ArrayList<String>();
-	
+
     public String getFileNameToSearch() {
-	return fileNameToSearch;
+        return fileNameToSearch;
     }
 
     public void setFileNameToSearch(String fileNameToSearch) {
-	this.fileNameToSearch = fileNameToSearch;
+        this.fileNameToSearch = fileNameToSearch;
     }
 
     public List<String> getResult() {
-	return result;
+        return result;
     }
+
     public void searchDirectory(File directory) {
         setFileNameToSearch(fileNameToSearch);
-	
 
-	if (directory.isDirectory()) {
-	    search(directory);
-	} else {
-	    System.out.println(directory.getAbsoluteFile() + " : is not a directory!");
-	}
+        if (directory.isDirectory()) {
+            search(directory);
+        } else {
+            System.out.println(directory.getAbsoluteFile() + " : is not a directory!");
+        }
 
     }
-    
-     private void search(File file) {
 
-	if (file.isDirectory()) {
-	  
-		
-            try{
-	    if (file.canRead()) {
-		for (File temp : file.listFiles()) {
-                    //System.out.println("temp.toString() : "+temp.toString());
-                    //System.out.println("file.listFiles() : "+file.listFiles().toString());
-		    if (temp.isDirectory()) {
-			search(temp);
-                        //System.out.println("temp.toString()" + temp.toString());
-                        
-		    } else {//System.out.println("temp.getName() : "+temp.getName().toLowerCase());
-                            //System.out.println("getFileNameToSearch() : "+getFileNameToSearch().toLowerCase());
-			
+    private void search(File file) {
+
+        if (file.isDirectory()) {
+
+            try {
+                if (file.canRead()) {
+                    for (File temp : file.listFiles()) {
+                        if (temp.isDirectory()) {
+                            search(temp);
+
+                        } else {
                             result.add(temp.getAbsoluteFile().toString());
+                        }
                     }
-	    }
 
-            } else {
-		System.out.println(file.getAbsoluteFile().toString() + "Permission Denied");
-            }}catch(Exception ex){
+                } else {
+                    System.out.println(file.getAbsoluteFile().toString() + "Permission Denied");
+                }
+            } catch (Exception ex) {
                 System.out.println(ex);
             }
         }
