@@ -44,7 +44,7 @@ public class Step1 {
     public static HashSet<String> connectingWords;
     public static Map<String, Integer> frequencyMap;
     String regexs = "\\W+|[0-9]+";
-    public static String[] stopwords = {"a", "as", "able", "about", "above", "according",
+    public static String[] stopwords = {"a","ar","thi","wa" ,"as", "able", "about", "above", "according",
         "accordingly", "across", "actually", "after", "afterwards", "again", "against",
         "aint", "all", "allow", "allows", "almost", "alone", "along", "already", "also",
         "although", "always", "am", "among", "amongst", "an", "and", "another", "any",
