@@ -16,7 +16,7 @@ public class SimilarityScoreTest {
     public void testGetScore() {
         SimilarityScore s = new SimilarityScore("Test", 0.99);
         assertEquals(0.99, s.getScore(), 0.000);
-        //d
+        //test
     }
 
 }
