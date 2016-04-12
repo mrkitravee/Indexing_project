@@ -34,7 +34,7 @@ public class JaroWinklerStrategyTest {
 		SimilarityStrategy s = new JaroWinklerStrategy();
 		String first = "Martha";
 		String second = "Marhta";
-		double expected = 0.961;
+		double expected = 0.961;//ค่าที่ได้จากการคำนวณ
 		double delta = 0.001;
 		double actual = s.score(first, second);
 		assertEquals(expected, actual, delta);

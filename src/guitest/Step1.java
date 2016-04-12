@@ -177,7 +177,7 @@ public class Step1 {
 
                                 this.frequencyMap.put(word.toLowerCase(), value + 1);
                             } else {
-                                this.frequencyMap.put(word, 0);
+                                this.frequencyMap.put(word.toLowerCase(), 0);
                             }
 
                         }
@@ -214,7 +214,7 @@ public class Step1 {
                                     frequencyMap.put(word.toLowerCase(), value + 1);
                                 } else {
 
-                                    frequencyMap.put(word, 0);
+                                    frequencyMap.put(word.toLowerCase(), 0);
                                 }
                             }
                         }
@@ -230,8 +230,8 @@ public class Step1 {
                         System.out.println("Total no of paragraph " + paragraphs.size());
                         for (XWPFParagraph para : paragraphs) {
                             String[] words = para.getText().split(regexs);
-                            for (String word : words) {
-                                //word = x.stripAffixes(word);
+                            for (String wordx : words) {
+                                String word = x.stripAffixes(wordx);
                                 if (this.connectingWords.contains(word.toLowerCase())) {
                                     continue;
                                 }
@@ -243,7 +243,7 @@ public class Step1 {
 
                                 } else {
 
-                                    this.frequencyMap.put(word, 0);
+                                    this.frequencyMap.put(word.toLowerCase(), 0);
                                 }
                             }
                         }
@@ -263,8 +263,8 @@ public class Step1 {
                         String[] words = we.getText().split(regexs);
                         
                         //System.out.println("Total no of paragraph "+paragraphs.length);
-                        for (String word : words) {
-                            //String word = x.stripAffixes(wordx);
+                        for (String wordx : words) {
+                            String word = x.stripAffixes(wordx);
                             
                             if (this.connectingWords.contains(word.toLowerCase())) {
                                 continue;
@@ -276,7 +276,7 @@ public class Step1 {
                                 this.frequencyMap.put(word.toLowerCase(), value + 1);
                             } else {
 
-                                this.frequencyMap.put(word, 0);
+                                this.frequencyMap.put(word.toLowerCase(), 0);
                             }
                         }
 
@@ -309,10 +309,9 @@ public class Step1 {
                                         this.frequencyMap.put(word.toLowerCase(), value + 1);
                                     } else {
 
-                                        this.frequencyMap.put(word, 0);
+                                        this.frequencyMap.put(word.toLowerCase(), 0);
                                     }
                                     break;
-
                             }
                         }
 
@@ -333,7 +332,6 @@ public class Step1 {
                                     switch (forlulaEvauator.evaluateInCell(cell).getCellType()) {
                                         case Cell.CELL_TYPE_STRING:
                                             String wordx = cell.getStringCellValue().toLowerCase();
-
                                             String word = x.stripAffixes(wordx);
                                             if (this.connectingWords.contains(word.toLowerCase())) {
                                                 continue;
@@ -345,7 +343,7 @@ public class Step1 {
                                                 this.frequencyMap.put(word.toLowerCase(), value + 1);
                                             } else {
 
-                                                this.frequencyMap.put(word, 0);
+                                                this.frequencyMap.put(word.toLowerCase(), 0);
                                             }
                                             break;
 
@@ -363,7 +361,6 @@ public class Step1 {
 
             }
             writeTocsv(directory);
-
             frequencyMap.clear();
 
         }
