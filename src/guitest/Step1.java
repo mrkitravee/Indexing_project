@@ -5,6 +5,8 @@
  */
 package guitest;
 
+import static guitest.indexingAction.connectingWords;
+import static guitest.indexingAction.frequencyMap;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
@@ -157,31 +159,33 @@ public class Step1 {
             this.SaveDirectory.add(indexs, fileDirectorys);
             indexs++;//update List
             try {
-                if (fileDirectorys.endsWith(".txt") || fileDirectorys.endsWith(".csv")) {
-                    reader = new BufferedReader(new FileReader(directory));
-                    while ((line = reader.readLine()) != null) {
+                if(fileDirectorys.endsWith(".txt")||fileDirectorys.endsWith(".csv")){
+                        reader = new BufferedReader(new FileReader(directory));
+                        while ((line = reader.readLine()) != null) {
 
-                        String linetrim = line.trim();
-                        //System.out.println("line : "+linetrim);
-                        String[] words = linetrim.split(regexs);
+                            String linetrim = line.trim();
+                            //System.out.println("line : "+linetrim);
+                            String[] words = linetrim.split(regexs);
 
-                        for (String wordx : words) {
+                            for (String wordx : words) {
+                                //System.out.println("word : "+word);
+                                if(wordx.length()>2){
+                                    String word = x.stripAffixes(wordx);
+                                    if(connectingWords.contains(word.toLowerCase())) {
+                                        continue;
+                                    }
+                                    Integer value = frequencyMap.get(word.toLowerCase());
 
-                            String word = x.stripAffixes(wordx);
-                            if (this.connectingWords.contains(word.toLowerCase())) {
-                                continue;
+                                    if(value != null) {
+
+                                        frequencyMap.put(word.toLowerCase(),value+1);
+                                    } else {
+
+                                        frequencyMap.put(word.toLowerCase(),0);
+                                    }
+                                }
                             }
-                            Integer value = this.frequencyMap.get(word.toLowerCase());
-
-                            if (value != null) {
-
-                                this.frequencyMap.put(word.toLowerCase(), value + 1);
-                            } else {
-                                this.frequencyMap.put(word.toLowerCase(), 0);
-                            }
-
                         }
-                    }
                     reader.close();
                 } else if (fileDirectorys.endsWith(".pdf")) {
 
