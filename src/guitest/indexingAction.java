@@ -187,7 +187,7 @@ public class indexingAction {
                                         frequencyMap.put(word.toLowerCase(),value+1);
                                     } else {
 
-                                        frequencyMap.put(word,0);
+                                        frequencyMap.put(word.toLowerCase(),0);
                                     }
                                 }
                             }
@@ -225,7 +225,7 @@ public class indexingAction {
                                     frequencyMap.put(word.toLowerCase(),value+1);
                                 } else {
 
-                                    frequencyMap.put(word,0);
+                                    frequencyMap.put(word.toLowerCase(),0);
                                 }
                             }
                         }
@@ -255,7 +255,7 @@ public class indexingAction {
                                                 frequencyMap.put(word.toLowerCase(),value+1);
                                             } else {
 
-                                                frequencyMap.put(word,0);
+                                                frequencyMap.put(word.toLowerCase(),0);
                                             }
                                         }
                                     }fis.close();
@@ -286,7 +286,7 @@ public class indexingAction {
                                                 frequencyMap.put(word.toLowerCase(),value+1);
                                             } else {
 
-                                                frequencyMap.put(word,0);
+                                                frequencyMap.put(word.toLowerCase(),0);
                                             }
                                         }
 
@@ -323,7 +323,7 @@ public class indexingAction {
                                                     frequencyMap.put(word.toLowerCase(),value+1);
                                                 } else {
 
-                                                    frequencyMap.put(word,0);
+                                                    frequencyMap.put(word.toLowerCase(),0);
                                                 }
                                                 break;
 
@@ -357,7 +357,7 @@ public class indexingAction {
                                                                 frequencyMap.put(word.toLowerCase(),value+1);
                                                             } else {
 
-                                                                frequencyMap.put(word,0);
+                                                                frequencyMap.put(word.toLowerCase(),0);
                                                             }
                                                             break;
 
