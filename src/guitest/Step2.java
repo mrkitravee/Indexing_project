@@ -37,6 +37,7 @@ public class Step2 {
         while ((line = fileReader.readLine()) != null) {
             String linetrim = line.trim();
                 String[] tokens = linetrim.split(COMMA_DELIMITER);
+                
                 if (tokens[0].length() >= 2) {
                     Indexing indexing = new Indexing(tokens[0], Integer.parseInt(tokens[1]), tokens[2]);
                     sortingList.add(indexing);

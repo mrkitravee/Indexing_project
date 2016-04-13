@@ -716,7 +716,7 @@ public class GUItestt extends javax.swing.JFrame {
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("SK indexing program version 4.5");
+        jLabel23.setText("SK indexing program version 4.6");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -912,12 +912,12 @@ public class GUItestt extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenu1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jMenu1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
