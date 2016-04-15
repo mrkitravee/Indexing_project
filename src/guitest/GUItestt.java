@@ -88,15 +88,12 @@ public class GUItestt extends javax.swing.JFrame {
     SimilarityStrategy strategy = new JaroWinklerStrategy();
     StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
     double score = 0;
+    
     public GUItestt() throws FileNotFoundException, IOException {
         
         initComponents();
+        
         displayTableData();
-        
-        
-        
-        
-         
     }
 
     /**
@@ -109,7 +106,7 @@ public class GUItestt extends javax.swing.JFrame {
          try{
         CSVReader csvReader = new CSVReader(new FileReader(new File(this.fileComplete+"/rrSort"+numFile+".csv")), ',', '"', '|');
         java.util.List<String[]> list = csvReader.readAll();
-
+        
         // Convert to 2D array
         String[][] dataArr = new String[list.size()][];
         dataArr = list.toArray(dataArr);
@@ -120,7 +117,7 @@ public class GUItestt extends javax.swing.JFrame {
 //                  {"Daisy", "19", "Female"},
 //                  {"Dave", "23", "Male"},
 //                  {"Jake", "30", "Male"}};
-  
+        
         
         DefaultTableModel x= new DefaultTableModel( dataArr,columns);
         x.setRowCount(20);
@@ -297,8 +294,16 @@ public class GUItestt extends javax.swing.JFrame {
 
         jMenu3.setText("jMenu3");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Demo JTable");
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Indexing Project");
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                formMouseEntered(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -495,10 +500,10 @@ public class GUItestt extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel11)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
+                .addComponent(jTextField1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(37, 37, 37)
                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(36, 36, 36))
         );
@@ -507,7 +512,7 @@ public class GUItestt extends javax.swing.JFrame {
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1)
                     .addComponent(jLabel11)
                     .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13))
@@ -711,7 +716,7 @@ public class GUItestt extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Top Ranking", jPanel3);
 
-        jPanel5.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel5.setBackground(new java.awt.Color(51, 153, 255));
 
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -1159,6 +1164,7 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        
         this.targetWord = jTextField4.getText();
         updateScore();
     }//GEN-LAST:event_jTextField4KeyReleased
@@ -1170,14 +1176,44 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
+//        try {
+//            AutoSuggestor autoSuggestor = new AutoSuggestor(jTextField1, new GUItestt() , null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.9f) {
+//                @Override
+//                    boolean wordTyped(String typedWord) {
+//                        
+//                        //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
+//                        ArrayList<String> words = new ArrayList<>();
+//                        words.add("hello");
+//                        words.add("heritage");
+//                        words.add("happiness");
+//                        words.add("goodbye");
+//                        words.add("cruel");
+//                        words.add("car");
+//                        words.add("war");
+//                        words.add("will");
+//                        words.add("world");
+//                        words.add("wall");
+//                        
+//                        
+//                        setDictionary(words);
+//                        //addToDictionary("bye");//adds a single word
+//                        
+//                        return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
+//                    }
+//            };
+//        } catch (IOException ex) {
+//            Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+       
         String query=jTextField1.getText().toLowerCase();
         filter(query);
         this.sourceWord = query.toLowerCase();
+        
         updateScore();
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jTable1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseEntered
@@ -1243,6 +1279,14 @@ public class GUItestt extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton5MouseClicked
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseClicked
+
+    private void formMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseEntered
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formMouseEntered
     
     /**
      * @param args the command line arguments
@@ -1276,7 +1320,7 @@ public class GUItestt extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             
             public void run() {
-                
+                    
                     try {
                         
                         new GUItestt().setVisible(true);
