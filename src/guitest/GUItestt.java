@@ -296,6 +296,7 @@ public class GUItestt extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Indexing Project");
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 formMouseClicked(evt);
@@ -1176,35 +1177,6 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-//        try {
-//            AutoSuggestor autoSuggestor = new AutoSuggestor(jTextField1, new GUItestt() , null, Color.WHITE.brighter(), Color.BLUE, Color.RED, 0.9f) {
-//                @Override
-//                    boolean wordTyped(String typedWord) {
-//                        
-//                        //create list for dictionary this in your case might be done via calling a method which queries db and returns results as arraylist
-//                        ArrayList<String> words = new ArrayList<>();
-//                        words.add("hello");
-//                        words.add("heritage");
-//                        words.add("happiness");
-//                        words.add("goodbye");
-//                        words.add("cruel");
-//                        words.add("car");
-//                        words.add("war");
-//                        words.add("will");
-//                        words.add("world");
-//                        words.add("wall");
-//                        
-//                        
-//                        setDictionary(words);
-//                        //addToDictionary("bye");//adds a single word
-//                        
-//                        return super.wordTyped(typedWord);//now call super to check for any matches against newest dictionary
-//                    }
-//            };
-//        } catch (IOException ex) {
-//            Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-       
         String query=jTextField1.getText().toLowerCase();
         filter(query);
         this.sourceWord = query.toLowerCase();
