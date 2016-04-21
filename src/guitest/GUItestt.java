@@ -159,10 +159,10 @@ public class GUItestt extends javax.swing.JFrame {
 //            model.addRow(row);
 //            System.out.println(paths[i].getName());
 //        }
-int[][] multi = new int[5][10];
+
         Object[][] row = new Object[paths.length][2];
         for (int i = 0; i < paths.length; i++) {
-            row[i][0] = i;
+            row[i][0] = i+1;
             row[i][1] = paths[i].getName();
             System.out.println(paths[i].getName());
         }
@@ -944,7 +944,7 @@ int[][] multi = new int[5][10];
                         .addGap(44, 44, 44)
                         .addComponent(filler3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel8Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(66, 66, 66)
                         .addComponent(jLabel16)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -956,9 +956,9 @@ int[][] multi = new int[5][10];
                 .addGap(137, 137, 137))
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel16)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1061,7 +1061,7 @@ int[][] multi = new int[5][10];
         int col = jTable3.columnAtPoint(evt.getPoint());
         System.out.println("jTable3 row" + row);
         System.out.println("jTable3 column" + col);
-        this.table3Data = jTable3.getValueAt(row, 0).toString(); //เอาแต่ชื่อไฟล์
+        this.table3Data = jTable3.getValueAt(row, 1).toString(); //เอาแต่ชื่อไฟล์
         System.out.println(this.table3Data);
     }//GEN-LAST:event_jTable3MouseClicked
 

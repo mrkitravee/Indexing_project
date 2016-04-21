@@ -46,7 +46,7 @@ public class Step1 {
     public static HashSet<String> connectingWords;
     public static Map<String, Integer> frequencyMap;
     String regexs = "\\W+|[0-9]+";
-    public static String[] stopwords = {"a","wa" ,"as", "able", "about", "above", 
+    public static String[] stopwords = {"a", "wa", "as", "able", "about", "above",
         "according", "accordingly", "across", "actually", "after", "afterwards", "again", "against",
         "aint", "all", "allow", "allows", "almost", "alone", "along", "already", "also",
         "although", "always", "am", "among", "amongst", "an", "and", "another", "any",
@@ -96,7 +96,7 @@ public class Step1 {
 
     static {
         Porter j = new Porter();
-        
+
         connectingWords = new HashSet<>();
         connectingWords = new HashSet<String>(Arrays.asList(stopwords));
 
@@ -106,11 +106,11 @@ public class Step1 {
         for (char c = '0'; c <= '9'; c++) {
             connectingWords.add(String.valueOf(c));
         }
-        
-        for(int i=0 ; i<stopwords.length ; i++){
+
+        for (int i = 0; i < stopwords.length; i++) {
             connectingWords.add(j.stripAffixes(stopwords[i]));
         }
-        
+
         frequencyMap = new HashMap<>();
     }
     private static final String COMMA_DELIMITER = ",";
@@ -164,33 +164,33 @@ public class Step1 {
             this.SaveDirectory.add(indexs, fileDirectorys);
             indexs++;//update List
             try {
-                if(fileDirectorys.endsWith(".txt")||fileDirectorys.endsWith(".csv")){
-                        reader = new BufferedReader(new FileReader(directory));
-                        while ((line = reader.readLine()) != null) {
+                if (fileDirectorys.endsWith(".txt") || fileDirectorys.endsWith(".csv")) {
+                    reader = new BufferedReader(new FileReader(directory));
+                    while ((line = reader.readLine()) != null) {
 
-                            String linetrim = line.trim();
-                            //System.out.println("line : "+linetrim);
-                            String[] words = linetrim.split(regexs);
+                        String linetrim = line.trim();
+                        //System.out.println("line : "+linetrim);
+                        String[] words = linetrim.split(regexs);
 
-                            for (String wordx : words) {
-                                //System.out.println("word : "+word);
-                                if(wordx.length()>2){
-                                    String word = x.stripAffixes(wordx);
-                                    if(connectingWords.contains(word.toLowerCase())) {
-                                        continue;
-                                    }
-                                    Integer value = frequencyMap.get(word.toLowerCase());
+                        for (String wordx : words) {
+                            //System.out.println("word : "+word);
+                            if (wordx.length() > 2) {
+                                String word = x.stripAffixes(wordx);
+                                if (connectingWords.contains(word.toLowerCase())) {
+                                    continue;
+                                }
+                                Integer value = frequencyMap.get(word.toLowerCase());
 
-                                    if(value != null) {
+                                if (value != null) {
 
-                                        frequencyMap.put(word.toLowerCase(),value+1);
-                                    } else {
+                                    frequencyMap.put(word.toLowerCase(), value + 1);
+                                } else {
 
-                                        frequencyMap.put(word.toLowerCase(),0);
-                                    }
+                                    frequencyMap.put(word.toLowerCase(), 0);
                                 }
                             }
                         }
+                    }
                     reader.close();
                 } else if (fileDirectorys.endsWith(".pdf")) {
 
@@ -240,19 +240,21 @@ public class Step1 {
                         for (XWPFParagraph para : paragraphs) {
                             String[] words = para.getText().split(regexs);
                             for (String wordx : words) {
-                                String word = x.stripAffixes(wordx);
-                                if (this.connectingWords.contains(word.toLowerCase())) {
-                                    continue;
-                                }
-                                Integer value = this.frequencyMap.get(word.toLowerCase());
+                                if (wordx.length() > 2) {
+                                    String word = x.stripAffixes(wordx);
+                                    if (this.connectingWords.contains(word.toLowerCase())) {
+                                        continue;
+                                    }
+                                    Integer value = this.frequencyMap.get(word.toLowerCase());
 
-                                if (value != null) {
+                                    if (value != null) {
 
-                                    this.frequencyMap.put(word.toLowerCase(), value + 1);
+                                        this.frequencyMap.put(word.toLowerCase(), value + 1);
 
-                                } else {
+                                    } else {
 
-                                    this.frequencyMap.put(word.toLowerCase(), 0);
+                                        this.frequencyMap.put(word.toLowerCase(), 0);
+                                    }
                                 }
                             }
                         }
@@ -270,22 +272,24 @@ public class Step1 {
                         WordExtractor we = new WordExtractor(doc);
 
                         String[] words = we.getText().split(regexs);
-                        
+
                         //System.out.println("Total no of paragraph "+paragraphs.length);
                         for (String wordx : words) {
-                            String word = x.stripAffixes(wordx);
-                            
-                            if (this.connectingWords.contains(word.toLowerCase())) {
-                                continue;
-                            }
-                            Integer value = this.frequencyMap.get(word.toLowerCase());
+                            if (wordx.length() > 2) {
+                                String word = x.stripAffixes(wordx);
 
-                            if (value != null) {
+                                if (this.connectingWords.contains(word.toLowerCase())) {
+                                    continue;
+                                }
+                                Integer value = this.frequencyMap.get(word.toLowerCase());
 
-                                this.frequencyMap.put(word.toLowerCase(), value + 1);
-                            } else {
+                                if (value != null) {
 
-                                this.frequencyMap.put(word.toLowerCase(), 0);
+                                    this.frequencyMap.put(word.toLowerCase(), value + 1);
+                                } else {
+
+                                    this.frequencyMap.put(word.toLowerCase(), 0);
+                                }
                             }
                         }
 
@@ -307,20 +311,22 @@ public class Step1 {
                             switch (forlulaEvauator.evaluateInCell(cell).getCellType()) {
                                 case Cell.CELL_TYPE_STRING:
                                     String wordx = cell.getStringCellValue().toLowerCase();
-                                    String word = x.stripAffixes(wordx);
-                                    if (this.connectingWords.contains(word.toLowerCase())) {
-                                        continue;
+                                    if (wordx.length() > 2) {
+                                        String word = x.stripAffixes(wordx);
+                                        if (this.connectingWords.contains(word.toLowerCase())) {
+                                            continue;
+                                        }
+                                        Integer value = this.frequencyMap.get(word.toLowerCase());
+
+                                        if (value != null) {
+
+                                            this.frequencyMap.put(word.toLowerCase(), value + 1);
+                                        } else {
+
+                                            this.frequencyMap.put(word.toLowerCase(), 0);
+                                        }
+                                        break;
                                     }
-                                    Integer value = this.frequencyMap.get(word.toLowerCase());
-
-                                    if (value != null) {
-
-                                        this.frequencyMap.put(word.toLowerCase(), value + 1);
-                                    } else {
-
-                                        this.frequencyMap.put(word.toLowerCase(), 0);
-                                    }
-                                    break;
                             }
                         }
 
@@ -341,21 +347,22 @@ public class Step1 {
                                     switch (forlulaEvauator.evaluateInCell(cell).getCellType()) {
                                         case Cell.CELL_TYPE_STRING:
                                             String wordx = cell.getStringCellValue().toLowerCase();
-                                            String word = x.stripAffixes(wordx);
-                                            if (this.connectingWords.contains(word.toLowerCase())) {
-                                                continue;
+                                            if (wordx.length() > 2) {
+                                                String word = x.stripAffixes(wordx);
+                                                if (this.connectingWords.contains(word.toLowerCase())) {
+                                                    continue;
+                                                }
+                                                Integer value = this.frequencyMap.get(word.toLowerCase());
+
+                                                if (value != null) {
+
+                                                    this.frequencyMap.put(word.toLowerCase(), value + 1);
+                                                } else {
+
+                                                    this.frequencyMap.put(word.toLowerCase(), 0);
+                                                }
+                                                break;
                                             }
-                                            Integer value = this.frequencyMap.get(word.toLowerCase());
-
-                                            if (value != null) {
-
-                                                this.frequencyMap.put(word.toLowerCase(), value + 1);
-                                            } else {
-
-                                                this.frequencyMap.put(word.toLowerCase(), 0);
-                                            }
-                                            break;
-
                                     }
                             }
                         }
@@ -401,7 +408,8 @@ public class Step1 {
         parent = parent.substring(parent.lastIndexOf("\\") + 1, parent.length());
         return parent;
     }
-    public List<String> getListDirectory(){
+
+    public List<String> getListDirectory() {
         return this.SaveDirectory;
     }
 }
