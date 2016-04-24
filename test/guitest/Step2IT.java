@@ -5,6 +5,7 @@
  */
 package guitest;
 
+import java.io.IOException;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -16,9 +17,9 @@ import static org.junit.Assert.*;
  *
  * @author Kitravee
  */
-public class NewStringIT {
+public class Step2IT {
     
-    public NewStringIT() {
+    public Step2IT() {
     }
     
     @BeforeClass
@@ -37,10 +38,18 @@ public class NewStringIT {
     public void tearDown() {
     }
 
-    @Test
-    public void testSomeMethod() {
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
+    /**
+     * Test of writeToMainSearching method, of class Step2.
+     */
     
+    @Test
+    public void setAndgetNameMainSearch() throws IOException {
+        String name = "test";
+        Step2 x = new Step2("xx");
+        x.setNameMainSearch(name);
+        String text1 = x.getfileFromStep1();
+        String text2 = x.getNameMainSearch();        
+        assertEquals(text1, "xx");
+        assertEquals(text2, "test");
+    }
 }

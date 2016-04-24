@@ -95,6 +95,9 @@ public class Step1oneFileCase {
     public String getWritingDirectory() {
         return this.newDirectory;
     }
+    public void setWritingDirectory(String newDirectory) {
+        this.newDirectory = newDirectory;
+    }
 }
 
 

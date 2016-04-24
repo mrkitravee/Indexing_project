@@ -48,7 +48,6 @@ public class PorterIT {
         String expResult = "play";
         String result = instance.stripAffixes(str);
         assertEquals(expResult, result);
-        
     }
     @Test
     public void testStripAffixes2() {

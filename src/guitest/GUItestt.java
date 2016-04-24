@@ -1130,11 +1130,13 @@ public class GUItestt extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
             //อ่านข้อมูล คัดแย้งข้อมูลที่เหมือนเข้าลงใน ตาราง Hash เขียนลง CSV
+            
             jTextArea1.setText("");
-
             jTextArea1.setForeground(Color.WHITE);
             System.out.println(this.fileTest);
             System.out.println(this.fileDocument);
+            checkErorcase();
+            Highlight();
             Step1 writing1 = new Step1(this.fileTest + "/test" + numFile + ".csv");// ไฟล์ที่เก็บไว้ตอนแรกยังไม่เรียง
             jTextArea1.append("RUNNING  : SAVE FILE TO HASH TABLE \n");
             jTextArea1.append("SAVING   : SAVE FILE TO DIRECTORY <" + this.fileTest + "/test" + numFile + ".csv>\n");

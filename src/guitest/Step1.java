@@ -395,6 +395,14 @@ public class Step1 {
         this.nameDirectoryTosearch = nameDirectoryTosearch;
 
     }
+    public String getNameDirectoryTostoredata() {
+        return this.nameDirectoryTostoredata;
+    }
+
+    public String getNameDirectoryTosearch() {
+        return this.nameDirectoryTosearch;
+
+    }
 
     public String getWritingDirectory() {
         return this.newDirectory;
