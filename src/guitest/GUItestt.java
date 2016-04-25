@@ -90,6 +90,7 @@ public class GUItestt extends javax.swing.JFrame {
     SimilarityStrategy strategy = new JaroWinklerStrategy();
     StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
     double score = 0;
+    String currentRead=" ";
 
     public GUItestt() throws FileNotFoundException, IOException {
 
@@ -106,7 +107,8 @@ public class GUItestt extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void displayTableData() {
         try {
-            CSVReader csvReader = new CSVReader(new FileReader(new File(this.fileComplete + "/rrSort" + numFile + ".csv")), ',', '"', '|');
+            
+            CSVReader csvReader = new CSVReader(new FileReader(new File(this.currentRead)), ',', '"', '|');
             java.util.List<String[]> list = csvReader.readAll();
 
             // Convert to 2D array
@@ -125,11 +127,7 @@ public class GUItestt extends javax.swing.JFrame {
             jTable1.setModel(x);
             dm = new DefaultTableModel(dataArr, columns);
             jTable2.setModel(dm);
-
-//        JViewport viewport = (JViewport) e.getSource();
-//    jScrollPane2.getVerticalScrollBar().setValue(viewport.getViewPosition().y);
-//        jScrollPane2.setRowHeader(viewport);
-            //jScrollPane1.setRowHeader(rowHeader);
+                
             jSpinner1.setValue(20);
             getFileName();
         } catch (IOException ex) {
@@ -269,6 +267,7 @@ public class GUItestt extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -974,12 +973,12 @@ public class GUItestt extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenu1.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
             public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
                 jMenu1AncestorAdded(evt);
             }
             public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
-            }
-            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
             }
         });
 
@@ -991,6 +990,15 @@ public class GUItestt extends javax.swing.JFrame {
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_W, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem2.setText("Open ");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -1156,10 +1164,10 @@ public class GUItestt extends javax.swing.JFrame {
             
             checkErorcase();
             Highlight();
-            
-            writing2.writeToMainSearching(this.fileComplete + "/rrSort" + numFile + ".csv"); //ไฟล์ที่เรียงเรียบร้อย
-            jTextArea1.append("SAVING   : SAVE FILE TO DIRECTORY <" + this.fileComplete + "/rrSort" + numFile + ".csv>\n");
-            jTextArea1.append("SORTTING : <" + this.fileComplete + "/rrSort" + numFile + ".csv>\n");
+            this.currentRead = this.fileComplete + "/rrSort" + numFile + ".csv";
+            writing2.writeToMainSearching(this.currentRead); //ไฟล์ที่เรียงเรียบร้อย
+            jTextArea1.append("SAVING   : SAVE FILE TO DIRECTORY <" + this.currentRead+"\n");
+            jTextArea1.append("SORTTING : <" + this.currentRead+"\n");
             displayTableData();
             Highlight();
             
@@ -1338,7 +1346,7 @@ public class GUItestt extends javax.swing.JFrame {
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         CSVReader csvReader = null;
         try {
-            csvReader = new CSVReader(new FileReader(new File(this.fileComplete + "/rrSort" + numFile + ".csv")), ',', '"', '|');
+            csvReader = new CSVReader(new FileReader(new File(this.currentRead)), ',', '"', '|');
         } catch (FileNotFoundException ex) {
             Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1410,6 +1418,29 @@ public class GUItestt extends javax.swing.JFrame {
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv");
+        JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(filter);
+        chooser.setCurrentDirectory(new java.io.File("."));
+        chooser.setDialogTitle("choosertitle");
+        chooser.setAcceptAllFileFilterUsed(false);
+
+        if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+            
+            this.currentRead = chooser.getSelectedFile().toString();
+            this.fileDocument = null;//chooser.getCurrentDirectory().toString();
+            System.out.println(this.currentRead);
+            System.out.println(this.fileDocument);
+            //this.fileDocument
+            displayTableData();
+        } else {
+            System.out.println("No Selection ");
+        }
+        
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1503,6 +1534,7 @@ UIManager.put("ProgressBar.selectionForeground",Color.BLUE);  //colour of precen
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
