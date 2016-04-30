@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.Point;
+import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -21,6 +22,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -90,7 +92,7 @@ public class GUItestt extends javax.swing.JFrame {
     SimilarityStrategy strategy = new JaroWinklerStrategy();
     StringSimilarityService service = new StringSimilarityServiceImpl(strategy);
     double score = 0;
-    String currentRead=" ";
+    String currentRead = " ";
 
     public GUItestt() throws FileNotFoundException, IOException {
 
@@ -107,7 +109,7 @@ public class GUItestt extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     private void displayTableData() {
         try {
-            
+
             CSVReader csvReader = new CSVReader(new FileReader(new File(this.currentRead)), ',', '"', '|');
             java.util.List<String[]> list = csvReader.readAll();
 
@@ -127,7 +129,7 @@ public class GUItestt extends javax.swing.JFrame {
             jTable1.setModel(x);
             dm = new DefaultTableModel(dataArr, columns);
             jTable2.setModel(dm);
-                
+
             jSpinner1.setValue(20);
             getFileName();
         } catch (IOException ex) {
@@ -150,7 +152,7 @@ public class GUItestt extends javax.swing.JFrame {
 
         }
         //model.setColumnIdentifiers(new String[]{"No.","File Names"});
-        String[] column = {"No.","File Names"};
+        String[] column = {"No.", "File Names"};
 //        Object[] row = new Object[1];
 //        for (int i = 0; i < paths.length; i++) {
 //            row[0] = paths[i].getName();
@@ -160,13 +162,26 @@ public class GUItestt extends javax.swing.JFrame {
 
         Object[][] row = new Object[paths.length][2];
         for (int i = 0; i < paths.length; i++) {
-            row[i][0] = i+1;
+            row[i][0] = i + 1;
             row[i][1] = paths[i].getName();
             System.out.println(paths[i].getName());
         }
         model.setDataVector(row, column);
     }
-
+    private void Storelog(String word){
+        
+       try{
+	    FileWriter writer = new FileWriter("C:\\Users\\Kitravee\\Desktop\\personal\\ss.csv",true);
+            writer.append(word);
+            writer.append('\n');
+            writer.flush();
+	    writer.close();
+	}
+	catch(IOException e)
+	{
+	     e.printStackTrace();
+	} 
+    }
     private void updateScore() {
         this.score = service.score(this.sourceWord, this.targetWord);
         int perCent = (int) (this.score * 100);
@@ -231,14 +246,14 @@ public class GUItestt extends javax.swing.JFrame {
         jPanel12 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButton5 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -528,6 +543,9 @@ public class GUItestt extends javax.swing.JFrame {
             }
         });
         jTextField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jTextField1KeyPressed(evt);
+            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField1KeyReleased(evt);
             }
@@ -535,33 +553,33 @@ public class GUItestt extends javax.swing.JFrame {
 
         jLabel11.setText("Search word");
 
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Search");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                jTextField4KeyReleased(evt);
+        jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jButton1KeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jButton1KeyTyped(evt);
             }
         });
-
-        jLabel13.setText("Target word");
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
         jPanel12Layout.setHorizontalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(104, 104, 104)
                 .addComponent(jLabel11)
-                .addGap(18, 18, 18)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel13)
-                .addGap(23, 23, 23)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -570,8 +588,7 @@ public class GUItestt extends javax.swing.JFrame {
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField1)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel13))
+                    .addComponent(jButton1))
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -609,44 +626,61 @@ public class GUItestt extends javax.swing.JFrame {
         jLabel21.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         jLabel21.setText("SEARCHING");
 
+        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField4ActionPerformed(evt);
+            }
+        });
+        jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextField4KeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 511, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addComponent(jLabel18)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(189, 189, 189)
-                        .addComponent(jLabel21)))
+                .addGap(190, 190, 190)
+                .addComponent(jLabel21)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18)
+                .addGap(12, 12, 12)
+                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(jLabel14)
+                .addGap(27, 27, 27))
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 511, Short.MAX_VALUE)
+                    .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel21)
-                .addGap(28, 28, 28)
+                .addGap(26, 26, 26)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel18)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(jLabel14))
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(9, 9, 9)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel18)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel10Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -665,10 +699,8 @@ public class GUItestt extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(26, 26, 26)
                 .addComponent(jLabel12)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(441, Short.MAX_VALUE))
+            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Searching", jPanel2);
@@ -767,7 +799,7 @@ public class GUItestt extends javax.swing.JFrame {
                     .addComponent(jButton4)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton5))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Top Ranking", jPanel3);
@@ -966,7 +998,7 @@ public class GUItestt extends javax.swing.JFrame {
                     .addComponent(jButton10))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         jMenuBar1.setBorder(null);
@@ -1034,10 +1066,10 @@ public class GUItestt extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(19, 19, 19))
         );
 
         pack();
@@ -1138,7 +1170,7 @@ public class GUItestt extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
             //อ่านข้อมูล คัดแย้งข้อมูลที่เหมือนเข้าลงใน ตาราง Hash เขียนลง CSV
-            
+
             jTextArea1.setText("");
             jTextArea1.setForeground(Color.WHITE);
             System.out.println(this.fileTest);
@@ -1156,21 +1188,21 @@ public class GUItestt extends javax.swing.JFrame {
             writing1.close();
             jProgressBar1.setValue(100);
             jTextArea1.append("READING  : READ FILE IN DIRECTORY <" + this.fileTest + "/test" + numFile + ".csv>\n");
-            
+
             checkErorcase();
             Highlight();
-            
+
             Step2 writing2 = new Step2(this.fileTest + "/test" + numFile + ".csv"); //เอาไฟล์ที่เก็บไว้
-            
+
             checkErorcase();
             Highlight();
             this.currentRead = this.fileComplete + "/rrSort" + numFile + ".csv";
             writing2.writeToMainSearching(this.currentRead); //ไฟล์ที่เรียงเรียบร้อย
-            jTextArea1.append("SAVING   : SAVE FILE TO DIRECTORY <" + this.currentRead+"\n");
-            jTextArea1.append("SORTTING : <" + this.currentRead+"\n");
+            jTextArea1.append("SAVING   : SAVE FILE TO DIRECTORY <" + this.currentRead + "\n");
+            jTextArea1.append("SORTTING : <" + this.currentRead + "\n");
             displayTableData();
             Highlight();
-            
+
         } catch (IOException ex) {
 //            
 //            jProgressBar1.setStringPainted(true);
@@ -1183,48 +1215,55 @@ public class GUItestt extends javax.swing.JFrame {
             Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
         } catch (BadLocationException ex) {
             Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        }
     }//GEN-LAST:event_jButton9ActionPerformed
-    private void checkErorcase(){
+    private void checkErorcase() {
         if (this.fileComplete == null) {
 
-                jTextArea1.append("ERROR : PLEASE SELECT TMP FILE\n");
-            }
-            if (this.fileTest == null) {
+            jTextArea1.append("ERROR : PLEASE SELECT TMP FILE\n");
+        }
+        if (this.fileTest == null) {
 
-                jTextArea1.append("ERROR : PLEASE SELECT MAIN FILE\n");
-            }
-            if (this.fileDocument == null) {
+            jTextArea1.append("ERROR : PLEASE SELECT MAIN FILE\n");
+        }
+        if (this.fileDocument == null) {
 
-                jTextArea1.append("ERROR : PLEASE SELECT DOCUMENT FILE\n");
-            }
+            jTextArea1.append("ERROR : PLEASE SELECT DOCUMENT FILE\n");
+        }
     }
-    private void Highlight() throws BadLocationException{
+
+    private void Highlight() throws BadLocationException {
         //Hilight each case
-            String text = jTextArea1.getText();
-            String[] tokens = text.split("\n");
-            for (int i = 0; i < tokens.length; i++) {
-                if (tokens[i].indexOf("SAVING") > -1 || tokens[i].indexOf("RUNNING") > -1
-                        || tokens[i].indexOf("READING") > -1) {
-                    int start = jTextArea1.getLineStartOffset(i);
-                    int end = jTextArea1.getLineEndOffset(i);
+        String text = jTextArea1.getText();
+        String[] tokens = text.split("\n");
+        for (int i = 0; i < tokens.length; i++) {
+            if (tokens[i].indexOf("SAVING") > -1 || tokens[i].indexOf("RUNNING") > -1
+                    || tokens[i].indexOf("READING") > -1) {
+                int start = jTextArea1.getLineStartOffset(i);
+                int end = jTextArea1.getLineEndOffset(i);
 
-                    painter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
-                    jTextArea1.getHighlighter().addHighlight(start, end, painter);
-                } else if (tokens[i].indexOf("SORTTING") > -1 ) {
-                    int start = jTextArea1.getLineStartOffset(i);
-                    int end = jTextArea1.getLineEndOffset(i);
+                painter = new DefaultHighlighter.DefaultHighlightPainter(Color.GREEN);
+                jTextArea1.getHighlighter().addHighlight(start, end, painter);
+            } else if (tokens[i].indexOf("SORTTING") > -1) {
+                int start = jTextArea1.getLineStartOffset(i);
+                int end = jTextArea1.getLineEndOffset(i);
 
-                    painter = new DefaultHighlighter.DefaultHighlightPainter(Color.BLUE);
-                    jTextArea1.getHighlighter().addHighlight(start, end, painter);
-                }else if (tokens[i].indexOf("ERROR") > -1 ) {
-                    int start = jTextArea1.getLineStartOffset(i);
-                    int end = jTextArea1.getLineEndOffset(i);
+                painter = new DefaultHighlighter.DefaultHighlightPainter(Color.BLUE);
+                jTextArea1.getHighlighter().addHighlight(start, end, painter);
+            } else if (tokens[i].indexOf("ERROR") > -1) {
+                int start = jTextArea1.getLineStartOffset(i);
+                int end = jTextArea1.getLineEndOffset(i);
 
-                    painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
-                    jTextArea1.getHighlighter().addHighlight(start, end, painter);
-                }
+                painter = new DefaultHighlighter.DefaultHighlightPainter(Color.RED);
+                jTextArea1.getHighlighter().addHighlight(start, end, painter);
+            } else if (tokens[i].indexOf("LOADING") > -1) {
+                int start = jTextArea1.getLineStartOffset(i);
+                int end = jTextArea1.getLineEndOffset(i);
+
+                painter = new DefaultHighlighter.DefaultHighlightPainter(Color.YELLOW);
+                jTextArea1.getHighlighter().addHighlight(start, end, painter);
             }
+        }
     }
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         JFileChooser chooser = new JFileChooser();
@@ -1242,8 +1281,8 @@ public class GUItestt extends javax.swing.JFrame {
         }
 //        jTextArea1.setForeground(Color.BLUE);
 //        jTextArea1.append("SETTING : " + chooser.getSelectedFile().toString() + "\n");
-        
-        jCheckBox3.setToolTipText("POSITION :" +this.fileDocument);
+
+        jCheckBox3.setToolTipText("POSITION :" + this.fileDocument);
         jCheckBox3.setSelected(true);
     }//GEN-LAST:event_jButton8ActionPerformed
 
@@ -1264,8 +1303,8 @@ public class GUItestt extends javax.swing.JFrame {
         }
 //        jTextArea1.setForeground(Color.BLUE);
 //        jTextArea1.append("SETTING : " + chooser.getSelectedFile().toString() + "\n");
-        
-        jCheckBox2.setToolTipText("POSITION : "+this.fileComplete);
+
+        jCheckBox2.setToolTipText("POSITION : " + this.fileComplete);
         jCheckBox2.setSelected(true);
     }//GEN-LAST:event_jButton7ActionPerformed
 
@@ -1288,8 +1327,8 @@ public class GUItestt extends javax.swing.JFrame {
         }
 //        jTextArea1.setForeground(Color.BLUE);
 //        jTextArea1.append("SETTING : " + chooser.getSelectedFile().toString() + "\n");
-        
-        jCheckBox1.setToolTipText("POSITION : "+this.fileTest);
+
+        jCheckBox1.setToolTipText("POSITION : " + this.fileTest);
         jCheckBox1.setSelected(true);
     }//GEN-LAST:event_jButton6ActionPerformed
     //Search Table
@@ -1317,11 +1356,7 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField4ActionPerformed
 
     private void jTextField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyReleased
-        String query = jTextField1.getText().toLowerCase();
-        filter(query);
-        this.sourceWord = query.toLowerCase();
 
-        updateScore();
     }//GEN-LAST:event_jTextField1KeyReleased
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -1412,7 +1447,7 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton9MouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
@@ -1420,7 +1455,7 @@ public class GUItestt extends javax.swing.JFrame {
     }//GEN-LAST:event_jCheckBox1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        
+
         FileNameExtensionFilter filter = new FileNameExtensionFilter("CSV FILES", "csv");
         JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(filter);
@@ -1429,18 +1464,53 @@ public class GUItestt extends javax.swing.JFrame {
         chooser.setAcceptAllFileFilterUsed(false);
 
         if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            
-            this.currentRead = chooser.getSelectedFile().toString();
-            this.fileDocument = null;//chooser.getCurrentDirectory().toString();
-            System.out.println(this.currentRead);
-            System.out.println(this.fileDocument);
-            //this.fileDocument
-            displayTableData();
+
+            try {
+                this.currentRead = chooser.getSelectedFile().toString();
+                this.fileDocument = null;//chooser.getCurrentDirectory().toString();
+                System.out.println(this.currentRead);
+                System.out.println(this.fileDocument);
+                //this.fileDocument
+                jTextArea1.setText("");
+                jTextArea1.setForeground(Color.WHITE);
+                jTextArea1.append("LOADING  : LOAD FILE <" + this.currentRead + ">");
+                Highlight();
+                displayTableData();
+            } catch (BadLocationException ex) {
+                Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
+            }
         } else {
             System.out.println("No Selection ");
         }
-        
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String query = jTextField1.getText().toLowerCase();
+        filter(query);
+        this.sourceWord = query.toLowerCase();
+        updateScore();
+        Storelog(jTextField1.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        
+    }//GEN-LAST:event_jButton1KeyPressed
+
+    private void jButton1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyTyped
+        
+    }//GEN-LAST:event_jButton1KeyTyped
+
+    private void jTextField1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField1KeyPressed
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+            String query = jTextField1.getText().toLowerCase();
+            filter(query);
+            this.sourceWord = query.toLowerCase();
+            updateScore();
+            Storelog(jTextField1.getText());
+        }
+    }//GEN-LAST:event_jTextField1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -1458,9 +1528,9 @@ public class GUItestt extends javax.swing.JFrame {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     UIManager.put("ProgressBar.background", Color.BLACK); //colour of the background    
 
-UIManager.put("ProgressBar.foreground", Color.RED);  //colour of progress bar
-    UIManager.put("ProgressBar.selectionBackground",Color.YELLOW);  //colour of percentage counter on black background    
-UIManager.put("ProgressBar.selectionForeground",Color.BLUE);  //colour of precentage counter on red background
+                    UIManager.put("ProgressBar.foreground", Color.RED);  //colour of progress bar
+                    UIManager.put("ProgressBar.selectionBackground", Color.YELLOW);  //colour of percentage counter on black background    
+                    UIManager.put("ProgressBar.selectionForeground", Color.BLUE);  //colour of precentage counter on red background
                     break;
                 }
             }
@@ -1496,6 +1566,7 @@ UIManager.put("ProgressBar.selectionForeground",Color.BLUE);  //colour of precen
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
@@ -1512,7 +1583,6 @@ UIManager.put("ProgressBar.selectionForeground",Color.BLUE);  //colour of precen
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
