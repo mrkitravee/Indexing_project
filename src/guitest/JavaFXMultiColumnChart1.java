@@ -171,17 +171,17 @@ public class JavaFXMultiColumnChart1 {
         TableColumn columnDay = new TableColumn("Day");
         columnDay.setCellValueFactory(
                 new PropertyValueFactory<Record, String>("fieldDay"));
-        columnDay.setMinWidth(60);
+        columnDay.setMinWidth(40);
 
         TableColumn columnValue1 = new TableColumn("Value 1");
         columnValue1.setCellValueFactory(
                 new PropertyValueFactory<Record, Double>("fieldValue1"));
-        columnValue1.setMinWidth(60);
+        columnValue1.setMinWidth(40);
 
         TableColumn columnValue2 = new TableColumn("No");
         columnValue2.setCellValueFactory(
                 new PropertyValueFactory<Record, Double>("fieldValue2"));
-        columnValue2.setMinWidth(60);
+        columnValue2.setMinWidth(40);
 
         //--- Add for Editable Cell of Value field, in Double
         columnValue1.setCellFactory(cellFactory);
@@ -232,7 +232,7 @@ public class JavaFXMultiColumnChart1 {
 //                "F",
 //                "G");
         final PieChart pieChart1 = new PieChart(myList.pieChartData1);
-        pieChart1.setPrefWidth(200);
+        pieChart1.setPrefWidth(300);
         pieChart1.setTitle("Pie Chart 1");
 
         final CategoryAxis xAxis2 = new CategoryAxis();
@@ -246,16 +246,16 @@ public class JavaFXMultiColumnChart1 {
         final BarChart<String, Number> BarChart2
                 = new BarChart<>(xAxis2, yAxis2);
         BarChart2.setTitle("Line Chart 2");
-        BarChart2.setPrefWidth(300);
+        BarChart2.setPrefWidth(250);
+        BarChart2.setPrefHeight(450);
         BarChart2.getData().add(XYSeries2);
 
         //---
         tableView.setItems(myList.dataList);
         tableView.getColumns().addAll(columnValue2, columnDay, columnValue1);
-        tableView.setPrefWidth(200);
-
+        tableView.setPrefWidth(170);
         HBox hBox = new HBox();
-        hBox.setSpacing(10);
+        hBox.setSpacing(0);
         hBox.getChildren().addAll(tableView, pieChart1, BarChart2);
 
         root.getChildren().add(hBox);

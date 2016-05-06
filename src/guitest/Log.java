@@ -73,6 +73,7 @@ public class Log {
             String directory = "C:\\Users\\Kitravee\\Desktop\\personal\\ss.csv";
             String line;
             List sortingList = new ArrayList();
+            frequencyMap.clear();
             reader = new BufferedReader(new FileReader(directory));
             try {
                 while ((line = reader.readLine()) != null) {
@@ -106,7 +107,7 @@ reader.close();
             Collections.sort(sortingList, Log.wordComparator);
             Collections.sort(sortingList, Log.FrequencyComparator);
             System.out.println(sortingList);
-            FileWriter fileWriter = new FileWriter("C:\\Users\\Kitravee\\Desktop\\personal\\finish.csv");
+            FileWriter fileWriter = new FileWriter("C:\\Users\\Kitravee\\Desktop\\personal\\finish.csv",false);
             for (int i = 0; i < sortingList.size(); i++) {
                 
                 Log y = new Log();
