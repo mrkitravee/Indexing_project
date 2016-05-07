@@ -41,6 +41,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -132,22 +133,26 @@ public class JavaFXMultiColumnChart1 {
         List<String> dayLabels = new ArrayList<String>();
         String line = " ";
         int count = 0;
-
+        int sumOther = 0;
         BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Kitravee\\Desktop\\personal\\finish.csv"));
 
         while ((line = reader.readLine()) != null) {
-            count++;
-            if(count<=7){
             String linetrim = line.trim();
-            //System.out.println("line : "+linetrim);
             String[] dataCSV = linetrim.split(",");
+            count++;
+            if(count<=9){
+            
+            //System.out.println("line : "+linetrim);
+            
             myList.add(new Record(dataCSV[0].toString(), Integer.parseInt(dataCSV[1]), count));
             dayLabels.add(dataCSV[0].toString());
             }
             else{
-                break;
+                sumOther = Integer.parseInt(dataCSV[1])+ sumOther;
             }
         }
+        myList.add(new Record("other", sumOther, 10));
+        dayLabels.add("other");
 
 //        myList.add(new Record("B", 200, 2));
 //        myList.add(new Record("C", 50, 3));
@@ -157,8 +162,8 @@ public class JavaFXMultiColumnChart1 {
 //        myList.add(new Record("G", 111, 7));
         Group root = new Group();
 
-        tableView.setEditable(true);
-
+        tableView.setEditable(false);
+        
         Callback<TableColumn, TableCell> cellFactory
                 = new Callback<TableColumn, TableCell>() {
 
@@ -168,12 +173,12 @@ public class JavaFXMultiColumnChart1 {
             }
         };
 
-        TableColumn columnDay = new TableColumn("Day");
+        TableColumn columnDay = new TableColumn("Word");
         columnDay.setCellValueFactory(
                 new PropertyValueFactory<Record, String>("fieldDay"));
         columnDay.setMinWidth(40);
 
-        TableColumn columnValue1 = new TableColumn("Value 1");
+        TableColumn columnValue1 = new TableColumn("Frequency");
         columnValue1.setCellValueFactory(
                 new PropertyValueFactory<Record, Double>("fieldValue1"));
         columnValue1.setMinWidth(40);
@@ -232,21 +237,20 @@ public class JavaFXMultiColumnChart1 {
 //                "F",
 //                "G");
         final PieChart pieChart1 = new PieChart(myList.pieChartData1);
-        pieChart1.setPrefWidth(300);
-        pieChart1.setTitle("Pie Chart 1");
-
+        pieChart1.setPrefWidth(325);
+        pieChart1.setTitle("Pie Chart");
         final CategoryAxis xAxis2 = new CategoryAxis();
         final NumberAxis yAxis2 = new NumberAxis();
-        xAxis2.setLabel("Day");
+        xAxis2.setLabel("Word");
         xAxis2.setCategories(FXCollections.<String>observableArrayList(dayLabels));
-        yAxis2.setLabel("Value 2");
+        yAxis2.setLabel("Frequency");
         XYChart.Series XYSeries2 = new XYChart.Series(myList.xyList2);
-        XYSeries2.setName("XYChart.Series 2");
+        XYSeries2.setName("Frequency");
 
         final BarChart<String, Number> BarChart2
                 = new BarChart<>(xAxis2, yAxis2);
-        BarChart2.setTitle("Line Chart 2");
-        BarChart2.setPrefWidth(250);
+        BarChart2.setTitle("Histogram");
+        BarChart2.setPrefWidth(290);
         BarChart2.setPrefHeight(450);
         BarChart2.getData().add(XYSeries2);
 
@@ -255,7 +259,7 @@ public class JavaFXMultiColumnChart1 {
         tableView.getColumns().addAll(columnValue2, columnDay, columnValue1);
         tableView.setPrefWidth(170);
         HBox hBox = new HBox();
-        hBox.setSpacing(0);
+        hBox.setSpacing(5);
         hBox.getChildren().addAll(tableView, pieChart1, BarChart2);
 
         root.getChildren().add(hBox);
