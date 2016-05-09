@@ -18,7 +18,7 @@ public class NewClass {
     public static void main(String[] args) throws FileNotFoundException, IOException {
         BufferedReader fileReader = new BufferedReader(new FileReader("D:\\Myproject\\Index\\main\\rrSort1.csv"));
         String line;
-        String word = "David".toLowerCase();
+        String word = "davidson".toLowerCase();
         String COMMA_DELIMITER=",";
         int count = 0;
         long startTime = System.currentTimeMillis();
