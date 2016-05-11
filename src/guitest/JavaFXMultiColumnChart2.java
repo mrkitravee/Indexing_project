@@ -50,10 +50,10 @@ import javafx.util.Callback;
  *
  * @web http://java-buddy.blogspot.com/
  */
-public class JavaFXMultiColumnChart1 {
+public class JavaFXMultiColumnChart2 {
 
     Group keepRoot = new Group();
-
+    String FileForPlot = "";
     public class Record {
 
         private SimpleStringProperty fieldDay;
@@ -91,13 +91,13 @@ public class JavaFXMultiColumnChart1 {
         }
     }
 
-    class MyList {
+    class MyList2 {
 
         ObservableList<Record> dataList;
         ObservableList<PieChart.Data> pieChartData1;
         ObservableList<XYChart.Data> xyList2;
 
-        MyList() {
+        MyList2() {
             dataList = FXCollections.observableArrayList();
             pieChartData1 = FXCollections.observableArrayList();
             xyList2 = FXCollections.observableArrayList();
@@ -119,51 +119,48 @@ public class JavaFXMultiColumnChart1 {
         }
     }
 
-    MyList myList;
+    MyList2 myList;
 
     private TableView<Record> tableView = new TableView<>();
 
 //    public static void main(String[] args) {
 //        launch(args);
 //    }
+    int num=1;
     public void start() throws IOException {
 
         //prepare myList
-        myList = new MyList();
+        myList = new MyList2();
         List<String> dayLabels = new ArrayList<String>();
         String line = " ";
         int count = 0;
         int sumOther = 0;
-        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Kitravee\\Desktop\\personal\\finish.csv"));
-
+        
+        BufferedReader reader = new BufferedReader(new FileReader("C:\\Users\\Kitravee\\Documents\\NetBeansProjects\\GUItest_2\\indexing\\sortingState\\rrSort"+num+".csv"));
+        num = num+1;
         while ((line = reader.readLine()) != null) {
             String linetrim = line.trim();
             String[] dataCSV = linetrim.split(",");
+            if(!dataCSV[3].equals(this.FileForPlot)){
+                continue;
+            }
+            else if(count<=9 && (dataCSV[3].equals(this.FileForPlot))){
             count++;
-            if(count<=9){
-            
             //System.out.println("line : "+linetrim);
             
-            myList.add(new Record(dataCSV[0].toString(), Integer.parseInt(dataCSV[1]), count));
-            dayLabels.add(dataCSV[0].toString());
+            myList.add(new JavaFXMultiColumnChart2.Record(dataCSV[1].toString(), Integer.parseInt(dataCSV[2]), count));
+            dayLabels.add(dataCSV[1].toString());
             }
             else{
-                sumOther = Integer.parseInt(dataCSV[1])+ sumOther;
+                sumOther = Integer.parseInt(dataCSV[2])+ sumOther;
             }
+            System.out.println("");
         }
-        myList.add(new Record("other", sumOther, 10));
+        myList.add(new JavaFXMultiColumnChart2.Record("other", sumOther, 10));
         dayLabels.add("other");
 
-//        myList.add(new Record("B", 200, 2));
-//        myList.add(new Record("C", 50, 3));
-//        myList.add(new Record("D", 75, 4));
-//        myList.add(new Record("E", 110, 5));
-//        myList.add(new Record("F", 300, 6));
-//        myList.add(new Record("G", 111, 7));
-        Group root = new Group();
-
         tableView.setEditable(false);
-        
+        Group root = new Group();
         Callback<TableColumn, TableCell> cellFactory
                 = new Callback<TableColumn, TableCell>() {
 
@@ -238,8 +235,8 @@ public class JavaFXMultiColumnChart1 {
 //                "F",
 //                "G");
         final PieChart pieChart1 = new PieChart(myList.pieChartData1);
-        pieChart1.setPrefWidth(325);
-        pieChart1.setTitle("Pie Chart");
+        pieChart1.setPrefWidth(350);
+        pieChart1.setTitle("Pie Chart : "+this.FileForPlot);
         final CategoryAxis xAxis2 = new CategoryAxis();
         final NumberAxis yAxis2 = new NumberAxis();
         xAxis2.setLabel("Word");
@@ -251,7 +248,7 @@ public class JavaFXMultiColumnChart1 {
         final BarChart<String, Number> BarChart2
                 = new BarChart<>(xAxis2, yAxis2);
         BarChart2.setTitle("Histogram");
-        BarChart2.setPrefWidth(290);
+        BarChart2.setPrefWidth(300);
         BarChart2.setPrefHeight(450);
         BarChart2.getData().add(XYSeries2);
 
@@ -261,7 +258,7 @@ public class JavaFXMultiColumnChart1 {
         tableView.setPrefWidth(170);
         HBox hBox = new HBox();
         hBox.setSpacing(5);
-        hBox.getChildren().addAll(tableView, pieChart1, BarChart2);
+        hBox.getChildren().addAll(pieChart1, BarChart2);
 
         root.getChildren().add(hBox);
         this.keepRoot = root;
@@ -271,6 +268,9 @@ public class JavaFXMultiColumnChart1 {
 
     public Group getRoot() {
         return this.keepRoot;
+    }
+    public void setFileForPlot(String FileForPlot){
+        this.FileForPlot = FileForPlot;
     }
 
     class EditingCell extends TableCell<Record, Double> {

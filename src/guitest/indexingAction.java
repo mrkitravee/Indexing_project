@@ -67,8 +67,8 @@ public class indexingAction {
      */
     public static HashSet<String> connectingWords;
     public static Map<String, Integer> frequencyMap;
-    public static String[] stopwords = {"a", "as", "able", "about", "above", "according",
-        "accordingly", "across", "actually", "after", "afterwards", "again", "against",
+    public static String[] stopwords = {"a", "wa", "as", "able", "about", "above",
+        "according", "accordingly", "across", "actually", "after", "afterwards", "again", "against",
         "aint", "all", "allow", "allows", "almost", "alone", "along", "already", "also",
         "although", "always", "am", "among", "amongst", "an", "and", "another", "any",
         "anybody", "anyhow", "anyone", "anything", "anyway", "anyways", "anywhere", "apart",
@@ -113,20 +113,22 @@ public class indexingAction {
         "whatever", "when", "whence", "whenever", "where", "wheres", "whereafter", "whereas", "whereby", "wherein", "whereupon",
         "wherever", "whether", "which", "while", "whither", "who", "whos", "whoever", "whole", "whom", "whose", "why", "will",
         "willing", "wish", "with", "within", "without", "wont", "wonder", "would", "would", "wouldnt", "yes", "yet", "you",
-        "youd", "youll", "youre", "youve", "your", "yours", "yourself", "yourselves", "zero", "'s", ""};
+        "youd", "youll", "youre", "youve", "your", "yours", "yourself", "yourselves", "zero", "'s"};
 
     static {
-
+        Porter jj = new Porter();
         connectingWords = new HashSet<>();
         connectingWords = new HashSet<String>(Arrays.asList(stopwords));
-
+        
         for (char c = 'a'; c <= 'z'; c++) {
             connectingWords.add(String.valueOf(c));
         }
         for (char c = '0'; c <= '9'; c++) {
             connectingWords.add(String.valueOf(c));
         }
-
+        for (int i = 0; i < stopwords.length; i++) {
+            connectingWords.add(jj.stripAffixes(stopwords[i]));
+        }
         frequencyMap = new HashMap<>();
     }
     private static final String COMMA_DELIMITER = ",";

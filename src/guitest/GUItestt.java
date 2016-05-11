@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.List;
 import java.awt.Point;
+import java.awt.PopupMenu;
 import java.awt.event.KeyEvent;
 import javax.swing.Timer;
 import java.awt.event.MouseAdapter;
@@ -285,6 +286,7 @@ public class GUItestt extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
+        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -684,7 +686,6 @@ public class GUItestt extends javax.swing.JFrame {
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel18)
@@ -1040,6 +1041,13 @@ public class GUItestt extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton3.setText("jButton3");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         jMenuBar1.setBorder(null);
 
         jMenu1.setText("File");
@@ -1094,9 +1102,15 @@ public class GUItestt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButton3)
+                        .addGap(64, 64, 64)))
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -1107,7 +1121,10 @@ public class GUItestt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jButton3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(34, 34, 34))
         );
 
@@ -1142,7 +1159,7 @@ public class GUItestt extends javax.swing.JFrame {
         System.out.println("jTable3 row" + row);
         System.out.println("jTable3 column" + col);
         this.table3Data = jTable3.getValueAt(row, 1).toString(); //เอาแต่ชื่อไฟล์
-        System.out.println(this.table3Data);
+        System.out.println("this.table3Data : "+this.table3Data);
         if (evt.getClickCount() == 2) {
             System.out.println("double clicked");
             if (Desktop.isDesktopSupported()) {
@@ -1540,6 +1557,7 @@ public class GUItestt extends javax.swing.JFrame {
             Log x = new Log();
             x.updateLog();
             initAndShowGUI();
+            
         } catch (IOException ex) {
             Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1587,20 +1605,23 @@ public class GUItestt extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_jButton2MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        initAndShowGUI2();
+    }//GEN-LAST:event_jButton3ActionPerformed
     //FXstart
     private void initAndShowGUI() {
         //This method is invoked on the EDT thread
-        //JFrame frame = new JFrame("Swing and JavaFX");
+//        JFrame frame = new JFrame("Swing and JavaFX");
 
         final JFXPanel fxPanel = new JFXPanel();
         jPanel11.removeAll();
         jPanel11.add(fxPanel);
         jPanel11.validate();
-        //jInternalFrame1.add(fxPanel);
-        //frame.add(fxPanel);
-        //frame.setSize(300, 200);
-        //frame.setVisible(true);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        frame.add(fxPanel);
+//        frame.setSize(300, 200);
+//        frame.setVisible(true);
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Platform.runLater(new Runnable() {
             @Override
@@ -1638,6 +1659,53 @@ public class GUItestt extends javax.swing.JFrame {
 //        root.getChildren().add(text);
 
         return (scene);
+    }
+     //FXstart2
+    private void initAndShowGUI2() {
+        //This method is invoked on the EDT thread
+        JFrame frame2 = new JFrame("Swing and JavaFX");
+        final JFXPanel fxPanel2 = new JFXPanel();
+        frame2.add(fxPanel2);
+        frame2.setSize(700, 500);
+        frame2.setVisible(true);
+
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    initFX2(fxPanel2);
+                } catch (IOException ex) {
+                    Logger.getLogger(GUItestt.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+    }
+
+    private void initFX2(JFXPanel fxPanel) throws IOException {
+        // This method is invoked on the JavaFX thread
+        Scene scene2 = createScene2();
+        fxPanel.setScene(scene2);
+    }
+
+    private Scene createScene2() throws IOException {
+        JavaFXMultiColumnChart2 plotting2 = new JavaFXMultiColumnChart2();
+        plotting2.setFileForPlot(this.fileDocument + "\\" + this.table3Data);
+        plotting2.start();
+        Group root2 = new Group();
+
+        root2 = plotting2.getRoot();
+        System.out.println(root2);
+        Scene scene2 = new Scene(root2, 780, 700);
+        Text  text  =  new  Text();
+        
+        text.setX(50);
+        text.setY(20);
+        text.setFont(new javafx.scene.text.Font(25));
+        text.setText("Welcome JavaFX!");
+
+        root2.getChildren().add(text);
+
+        return (scene2);
     }
 
     //FXEnd
@@ -1699,6 +1767,7 @@ public class GUItestt extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
