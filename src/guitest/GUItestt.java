@@ -49,12 +49,14 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JViewport;
 import javax.swing.ListModel;
 import javax.swing.RowFilter;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -286,7 +288,6 @@ public class GUItestt extends javax.swing.JFrame {
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
-        jButton3 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -858,7 +859,7 @@ public class GUItestt extends javax.swing.JFrame {
         jLabel23.setBackground(new java.awt.Color(255, 255, 255));
         jLabel23.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel23.setText("SK indexing program version 5.0");
+        jLabel23.setText("SK indexing program version 5.4");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -1041,13 +1042,6 @@ public class GUItestt extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jButton3.setText("jButton3");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         jMenuBar1.setBorder(null);
 
         jMenu1.setText("File");
@@ -1102,15 +1096,9 @@ public class GUItestt extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton3)
-                        .addGap(64, 64, 64)))
+                .addGap(25, 25, 25)
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
         );
@@ -1121,10 +1109,7 @@ public class GUItestt extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 495, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34))
         );
 
@@ -1160,7 +1145,10 @@ public class GUItestt extends javax.swing.JFrame {
         System.out.println("jTable3 column" + col);
         this.table3Data = jTable3.getValueAt(row, 1).toString(); //เอาแต่ชื่อไฟล์
         System.out.println("this.table3Data : "+this.table3Data);
-        if (evt.getClickCount() == 2) {
+        if (evt.getClickCount() == 3) {
+            initAndShowGUI2();
+        }
+        else if (evt.getClickCount() == 2) {
             System.out.println("double clicked");
             if (Desktop.isDesktopSupported()) {
 
@@ -1171,9 +1159,15 @@ public class GUItestt extends javax.swing.JFrame {
                 }
             }
         }
+        
+  
+        
+        
+         
+        
 
     }//GEN-LAST:event_jTable3MouseClicked
-
+    
     private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
 
 
@@ -1227,7 +1221,7 @@ public class GUItestt extends javax.swing.JFrame {
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         try {
             //อ่านข้อมูล คัดแย้งข้อมูลที่เหมือนเข้าลงใน ตาราง Hash เขียนลง CSV
-
+            initAndShowGUI();
             jTextArea1.setText("");
             jTextArea1.setForeground(Color.WHITE);
             System.out.println(this.fileTest);
@@ -1605,10 +1599,6 @@ public class GUItestt extends javax.swing.JFrame {
                 }
             }
     }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        initAndShowGUI2();
-    }//GEN-LAST:event_jButton3ActionPerformed
     //FXstart
     private void initAndShowGUI() {
         //This method is invoked on the EDT thread
@@ -1666,7 +1656,7 @@ public class GUItestt extends javax.swing.JFrame {
         JFrame frame2 = new JFrame("Swing and JavaFX");
         final JFXPanel fxPanel2 = new JFXPanel();
         frame2.add(fxPanel2);
-        frame2.setSize(700, 500);
+        frame2.setSize(490, 480);
         frame2.setVisible(true);
 
         Platform.runLater(new Runnable() {
@@ -1699,9 +1689,9 @@ public class GUItestt extends javax.swing.JFrame {
         Text  text  =  new  Text();
         
         text.setX(50);
-        text.setY(20);
+        text.setY(40);
         text.setFont(new javafx.scene.text.Font(25));
-        text.setText("Welcome JavaFX!");
+        text.setText("INFOMATION : "+this.table3Data);
 
         root2.getChildren().add(text);
 
@@ -1767,7 +1757,6 @@ public class GUItestt extends javax.swing.JFrame {
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;

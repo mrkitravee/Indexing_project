@@ -235,8 +235,8 @@ public class JavaFXMultiColumnChart2 {
 //                "F",
 //                "G");
         final PieChart pieChart1 = new PieChart(myList.pieChartData1);
-        pieChart1.setPrefWidth(350);
-        pieChart1.setTitle("Pie Chart : "+this.FileForPlot);
+        pieChart1.setPrefWidth(450);
+        pieChart1.setTitle(" ");
         final CategoryAxis xAxis2 = new CategoryAxis();
         final NumberAxis yAxis2 = new NumberAxis();
         xAxis2.setLabel("Word");
@@ -248,7 +248,7 @@ public class JavaFXMultiColumnChart2 {
         final BarChart<String, Number> BarChart2
                 = new BarChart<>(xAxis2, yAxis2);
         BarChart2.setTitle("Histogram");
-        BarChart2.setPrefWidth(300);
+        BarChart2.setPrefWidth(400);
         BarChart2.setPrefHeight(450);
         BarChart2.getData().add(XYSeries2);
 
@@ -258,7 +258,7 @@ public class JavaFXMultiColumnChart2 {
         tableView.setPrefWidth(170);
         HBox hBox = new HBox();
         hBox.setSpacing(5);
-        hBox.getChildren().addAll(pieChart1, BarChart2);
+        hBox.getChildren().addAll(pieChart1);
 
         root.getChildren().add(hBox);
         this.keepRoot = root;
